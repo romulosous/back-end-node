@@ -2,19 +2,22 @@ import express from "express";
 
 const app = express();
 
-// Métodos HTTP -> GET | POST | PUT | DELETE
-
-// http://localhost:3333/users
+app.use(express.json());
 
 app.get("/users", (request, response) => {
-  return response.json(["usuario 1", "usuario 2"]);
+  const { perPage, currentPage } = request.query;
 });
 
 app.post("/users", (request, response) => {
+  const body = request.body;
+  console.log(body);
+
   return response.json({ message: "Criando usuário" });
 });
 
-app.put("/users", (request, response) => {
+app.put("/users/:id", (request, response) => {
+  const { id } = request.params;
+  console.log(id);
   return response.json({ message: "Atualizando usuário" });
 });
 
